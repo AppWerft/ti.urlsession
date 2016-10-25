@@ -18,5 +18,7 @@
 -(void)finishTasksAndInvalidate:(SessionProxy*)session;
 -(void)invalidateAndCancel:(SessionProxy*)session;
 -(NSNumber*)backgroundDownloadTaskWithURL:(id)args;
+-(NSNumber*)backgroundUpTaskWithURL:(id)args;
+
 
 @end
