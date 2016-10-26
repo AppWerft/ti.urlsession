@@ -124,6 +124,8 @@
 
     return nil;
 }
+
+
 -(NSNumber*)backgroundUploadTaskWithURL:(id)args
 {
     ENSURE_ARG_COUNT(args, 2);
@@ -136,9 +138,13 @@
     
     if ([(SessionProxy*)session session] != nil) {
         if ([url length] != 0) {
-            NSURLSessionUploadTask *task = [[(SessionProxy*)session session] uploadTaskWithURL:[NSURL URLWithString:url]];
-            [task resume];
             
+             NSURLSessionUploadTask *task  =
+            [session uploadTaskWithRequest:multipartRequest fromFile:tmpFileUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response,
+                                                                                                    NSError * _Nullable error) {
+                
+            }];
+            [task resume];
             return NUMINTEGER([task taskIdentifier]);
         } else {
             NSLog(@"[ERROR] The specified url for background upload task is empty. Please provide a proper url.");
