@@ -138,11 +138,9 @@
     
     if ([(SessionProxy*)session session] != nil) {
         if ([url length] != 0) {
-            
              NSURLSessionUploadTask *task  =
-            [session uploadTaskWithRequest:multipartRequest fromFile:tmpFileUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response,
+            [[(SessionProxy*)session session] uploadTaskWithRequest:multipartRequest fromFile:tmpFileUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response,
                                                                                                     NSError * _Nullable error) {
-                
             }];
             [task resume];
             return NUMINTEGER([task taskIdentifier]);
