@@ -125,16 +125,19 @@
     return nil;
 }
 
-
+// this is added by Rainer S. for realising of upload
 -(NSNumber*)backgroundUploadTaskWithURL:(id)args
 {
-    ENSURE_ARG_COUNT(args, 2);
+    ENSURE_ARG_COUNT(args, 3); // first: session, second: URL
     
     SessionProxy *session = nil;
     NSString *url = nil;
+    NSDictionary  *payload = nil;
     
     ENSURE_ARG_AT_INDEX(session, args, 0, SessionProxy);
     ENSURE_ARG_AT_INDEX(url, args, 1, NSString);
+    ENSURE_ARG_AT_INDEX(payload args, 2, NSDictionary);
+    
     
     if ([(SessionProxy*)session session] != nil) {
         if ([url length] != 0) {
