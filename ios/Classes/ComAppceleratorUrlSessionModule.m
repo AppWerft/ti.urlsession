@@ -125,38 +125,6 @@
     return nil;
 }
 
-/*
-// this is added by Rainer S. for realising of upload
--(NSNumber*)backgroundUploadTaskWithURL:(id)args
-{
-    ENSURE_ARG_COUNT(args, 3); // first: session, second: URL
-    
-    SessionProxy *session = nil;
-    NSString *url = nil;
-    NSDictionary  *payload = nil;
-    
-    ENSURE_ARG_AT_INDEX(session, args, 0, SessionProxy);
-    ENSURE_ARG_AT_INDEX(url, args, 1, NSString);
-    ENSURE_ARG_AT_INDEX(payload args, 2, NSDictionary);
-    
-    
-    if ([(SessionProxy*)session session] != nil) {
-        if ([url length] != 0) {
-             NSURLSessionUploadTask *task  =
-            [[(SessionProxy*)session session] uploadTaskWithRequest:multipartRequest fromFile:tmpFileUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response,
-                                                                                                    NSError * _Nullable error) {
-            }];
-            [task resume];
-            return NUMINTEGER([task taskIdentifier]);
-        } else {
-            NSLog(@"[ERROR] The specified url for background upload task is empty. Please provide a proper url.");
-        }
-    } else {
-        NSLog(@"[ERROR] Need to specify a proper URLSession to start a background upload task.");
-    }
-    
-    return nil;
-}*/
 -(id)backgroundUploadTaskWithURL:(id)args {
     ENSURE_ARG_COUNT(args, 2);
     
