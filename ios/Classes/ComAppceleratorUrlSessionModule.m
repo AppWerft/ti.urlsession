@@ -125,6 +125,7 @@
     return nil;
 }
 
+/*
 // this is added by Rainer S. for realising of upload
 -(NSNumber*)backgroundUploadTaskWithURL:(id)args
 {
@@ -155,6 +156,34 @@
     }
     
     return nil;
+}*/
+-(id)backgroundUploadTaskWithURL:(id)args {
+    ENSURE_ARG_COUNT(args, 2);
+    
+    SessionProxy *session = nil;
+    NSString *url = nil;
+    TiBlob *blob = nil;
+    
+    ENSURE_ARG_AT_INDEX(session, args, 0, SessionProxy);
+    ENSURE_ARG_AT_INDEX(url, args, 1, NSString);
+    ENSURE_ARG_AT_INDEX(blob, args, 2, TiBlob);
+    
+    if ([(SessionProxy*)session session] != nil) {
+        if ([url length] != 0) {
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+            NSURLSessionUploadTask *task = [[(SessionProxy*)session session] uploadTaskWithRequest:request
+                                                                                          fromData:[blob data]];
+            [task resume];
+            
+            return NUMINTEGER([task taskIdentifier]);
+        } else {
+            NSLog(@"[ERROR] The specified url for background download task is empty. Please provide a proper url.");
+        }
+    } else {
+        NSLog(@"[ERROR] Need to specify a proper URLSession to start a background download task.");
+    }
+    
+    return [NSNull null];
 }
 
 @end
